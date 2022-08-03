@@ -34,7 +34,7 @@ final class TodoViewModel: TodoViewModelInput, TodoViewModelOutput, TodoViewMode
             userName: "david",
             title: "random",
             contents: "random contents",
-            isCompleted: false
+            isCompleted: true
         ),
         TodoModel(
             todoId: UUID().uuidString,

@@ -13,6 +13,11 @@ import RxSwift
 class TodoViewController: UIViewController {
     private lazy var todoTableView: UITableView = {
         let tableView = UITableView()
+        tableView.register(
+            TodoTableViewCell.self,
+            forCellReuseIdentifier: TodoTableViewCell.identifier
+        )
+
         return tableView
     }()
 
@@ -52,12 +57,17 @@ private extension TodoViewController {
 
     func bindUI() {
         viewModel.outputs.todoListPublishSubject
+            .debug("todoListPublishSubject")
             .bind(to: todoTableView.rx.items) { tableView, indexPath, element in
                 guard let cell = tableView.dequeueReusableCell(
                     withIdentifier: TodoTableViewCell.identifier
                 ) as? TodoTableViewCell else { return UITableViewCell() }
 
-                cell.setupCell(title: "테스트 데이터")
+                cell.setupCell(
+                    title: element.title,
+                    isCompleted: element.isCompleted
+                )
+
                 return cell
             }
             .disposed(by: disposeBag)
