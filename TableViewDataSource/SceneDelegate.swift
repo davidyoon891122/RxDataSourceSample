@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         window?.backgroundColor = .systemBackground
-        window?.rootViewController = TodoViewController()
+        window?.rootViewController = UINavigationController(rootViewController: TodoViewController())
         window?.makeKeyAndVisible()
     }
 }

@@ -12,4 +12,5 @@ struct TodoModel: Codable {
     var userName: String = ""
     var title: String = ""
     var contents: String = ""
+    var isCompleted: Bool = false
 }

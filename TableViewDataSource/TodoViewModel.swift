@@ -33,19 +33,22 @@ final class TodoViewModel: TodoViewModelInput, TodoViewModelOutput, TodoViewMode
             todoId: UUID().uuidString,
             userName: "david",
             title: "random",
-            contents: "random contents"
+            contents: "random contents",
+            isCompleted: false
         ),
         TodoModel(
             todoId: UUID().uuidString,
             userName: "david",
             title: "Create a Repository",
-            contents: "Create a Repository Contents"
+            contents: "Create a Repository Contents",
+            isCompleted: false
         ),
         TodoModel(
             todoId: UUID().uuidString,
             userName: "david",
             title: "Vue.js Test",
-            contents: "Create a Vue.js sample test"
+            contents: "Create a Vue.js sample test",
+            isCompleted: false
         ),
     ]
 
