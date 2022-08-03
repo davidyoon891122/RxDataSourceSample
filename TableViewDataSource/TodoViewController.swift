@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  TodoViewController.swift
 //  TableViewDataSource
 //
 //  Created by iMac on 2022/08/02.
@@ -10,8 +10,7 @@ import SnapKit
 import RxCocoa
 import RxSwift
 
-class ViewController: UIViewController {
-
+class TodoViewController: UIViewController {
     private lazy var topView: UIView = {
         let view = UIView()
         return view
@@ -28,8 +27,8 @@ class ViewController: UIViewController {
     }
 }
 
-private extension ViewController {
+private extension TodoViewController {
     func setupViews() {
-        
+
     }
 }
