@@ -14,6 +14,7 @@ protocol TodoViewModelInput {
 
 protocol TodoViewModelOutput {
     var todoListPublishSubject: PublishSubject<[TodoModel]> { get }
+    var todoListDatasourcePublishSubject: PublishSubject<[TodoSectionModel]> { get }
 }
 
 protocol TodoViewModelType {
@@ -27,6 +28,7 @@ final class TodoViewModel: TodoViewModelInput, TodoViewModelOutput, TodoViewMode
     var outputs: TodoViewModelOutput { self }
 
     var todoListPublishSubject: PublishSubject<[TodoModel]> = .init()
+    var todoListDatasourcePublishSubject: PublishSubject<[TodoSectionModel]> = .init()
 
     private var todoList: [TodoModel] = [
         TodoModel(
@@ -52,8 +54,17 @@ final class TodoViewModel: TodoViewModelInput, TodoViewModelOutput, TodoViewMode
         ),
     ]
 
+    private var todoListDataSource: [TodoSectionModel] = [
+        TodoSectionModel(header: "Header", items: [
+                Todo(userId: 0, id: 0, title: "test", completed: false)
+            ])
+
+    ]
+
 
     func loadTodoList() {
         outputs.todoListPublishSubject.onNext(todoList)
+
+        outputs.todoListDatasourcePublishSubject.onNext(todoListDataSource)
     }
 }

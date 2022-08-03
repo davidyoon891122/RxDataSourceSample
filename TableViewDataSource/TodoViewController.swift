@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import RxCocoa
 import RxSwift
+import RxDataSources
 
 class TodoViewController: UIViewController {
     private lazy var todoTableView: UITableView = {
@@ -56,20 +57,25 @@ private extension TodoViewController {
     }
 
     func bindUI() {
-        viewModel.outputs.todoListPublishSubject
-            .debug("todoListPublishSubject")
-            .bind(to: todoTableView.rx.items) { tableView, indexPath, element in
+        typealias TodoSectionDataSource = RxTableViewSectionedReloadDataSource<TodoSectionModel>
+        let dataSource: TodoSectionDataSource = {
+            let ds = TodoSectionDataSource(configureCell: { (dataSource, tableView, indexPath, todo) -> UITableViewCell in
                 guard let cell = tableView.dequeueReusableCell(
-                    withIdentifier: TodoTableViewCell.identifier
+                    withIdentifier: TodoTableViewCell.identifier,
+                    for: indexPath
                 ) as? TodoTableViewCell else { return UITableViewCell() }
-
                 cell.setupCell(
-                    title: element.title,
-                    isCompleted: element.isCompleted
+                    title: todo.title,
+                    isCompleted: todo.completed
                 )
-
                 return cell
-            }
+            })
+            return ds
+        }()
+
+
+        viewModel.outputs.todoListDatasourcePublishSubject
+            .bind(to: todoTableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
     }
 }
