@@ -17,11 +17,12 @@
 		ADB8B9C92899F25400A50E21 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = ADB8B9C82899F25400A50E21 /* RxRelay */; };
 		ADB8B9CB2899F25400A50E21 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = ADB8B9CA2899F25400A50E21 /* RxSwift */; };
 		ADB8B9CE2899F26900A50E21 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = ADB8B9CD2899F26900A50E21 /* RxDataSources */; };
-		ADB8B9D02899F6E200A50E21 /* MySection.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8B9CF2899F6E200A50E21 /* MySection.swift */; };
 		ADB8B9D22899F75500A50E21 /* TodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8B9D12899F75500A50E21 /* TodoViewModel.swift */; };
 		ADB8B9D62899F8C600A50E21 /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8B9D52899F8C600A50E21 /* TodoModel.swift */; };
 		ADB8B9D8289A0AB200A50E21 /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8B9D7289A0AB200A50E21 /* TodoTableViewCell.swift */; };
 		ADB8B9DB289A35D300A50E21 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8B9DA289A35D300A50E21 /* Todo.swift */; };
+		ADB8B9DE289A4E5B00A50E21 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8B9DD289A4E5B00A50E21 /* NetworkManager.swift */; };
+		ADB8B9E1289A4E8600A50E21 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = ADB8B9E0289A4E8600A50E21 /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,12 +33,12 @@
 		AD8EB0432898FF48005880A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD8EB0462898FF48005880A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AD8EB0482898FF48005880A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ADB8B9CF2899F6E200A50E21 /* MySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySection.swift; sourceTree = "<group>"; };
 		ADB8B9D12899F75500A50E21 /* TodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewModel.swift; sourceTree = "<group>"; };
 		ADB8B9D52899F8C600A50E21 /* TodoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModel.swift; sourceTree = "<group>"; };
 		ADB8B9D7289A0AB200A50E21 /* TodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
 		ADB8B9D9289A226600A50E21 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		ADB8B9DA289A35D300A50E21 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		ADB8B9DD289A4E5B00A50E21 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +49,7 @@
 				ADB8B9C92899F25400A50E21 /* RxRelay in Frameworks */,
 				ADB8B9C72899F25400A50E21 /* RxCocoa in Frameworks */,
 				ADB8B9CB2899F25400A50E21 /* RxSwift in Frameworks */,
+				ADB8B9E1289A4E8600A50E21 /* Alamofire in Frameworks */,
 				ADB8B9CE2899F26900A50E21 /* RxDataSources in Frameworks */,
 				ADB8B9C42899F23F00A50E21 /* SnapKit in Frameworks */,
 			);
@@ -78,11 +80,11 @@
 			children = (
 				ADB8B9D32899F89800A50E21 /* Delegate */,
 				ADB8B9D42899F8AD00A50E21 /* Scene */,
-				ADB8B9CF2899F6E200A50E21 /* MySection.swift */,
+				ADB8B9DC289A4D1000A50E21 /* Model */,
+				ADB8B9E2289A502300A50E21 /* Manager */,
 				AD8EB0432898FF48005880A5 /* Assets.xcassets */,
 				AD8EB0452898FF48005880A5 /* LaunchScreen.storyboard */,
 				AD8EB0482898FF48005880A5 /* Info.plist */,
-				ADB8B9D52899F8C600A50E21 /* TodoModel.swift */,
 			);
 			path = TableViewDataSource;
 			sourceTree = "<group>";
@@ -102,9 +104,25 @@
 				AD8EB03E2898FF46005880A5 /* TodoViewController.swift */,
 				ADB8B9D12899F75500A50E21 /* TodoViewModel.swift */,
 				ADB8B9D7289A0AB200A50E21 /* TodoTableViewCell.swift */,
-				ADB8B9DA289A35D300A50E21 /* Todo.swift */,
 			);
 			name = Scene;
+			sourceTree = "<group>";
+		};
+		ADB8B9DC289A4D1000A50E21 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ADB8B9D52899F8C600A50E21 /* TodoModel.swift */,
+				ADB8B9DA289A35D300A50E21 /* Todo.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		ADB8B9E2289A502300A50E21 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				ADB8B9DD289A4E5B00A50E21 /* NetworkManager.swift */,
+			);
+			name = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -129,6 +147,7 @@
 				ADB8B9C82899F25400A50E21 /* RxRelay */,
 				ADB8B9CA2899F25400A50E21 /* RxSwift */,
 				ADB8B9CD2899F26900A50E21 /* RxDataSources */,
+				ADB8B9E0289A4E8600A50E21 /* Alamofire */,
 			);
 			productName = TableViewDataSource;
 			productReference = AD8EB0372898FF46005880A5 /* TableViewDataSource.app */;
@@ -162,6 +181,7 @@
 				ADB8B9C22899F23F00A50E21 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				ADB8B9C52899F25400A50E21 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				ADB8B9CC2899F26900A50E21 /* XCRemoteSwiftPackageReference "RxDataSources" */,
+				ADB8B9DF289A4E8600A50E21 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = AD8EB0382898FF46005880A5 /* Products */;
 			projectDirPath = "";
@@ -191,9 +211,9 @@
 			files = (
 				ADB8B9D8289A0AB200A50E21 /* TodoTableViewCell.swift in Sources */,
 				AD8EB03F2898FF46005880A5 /* TodoViewController.swift in Sources */,
-				ADB8B9D02899F6E200A50E21 /* MySection.swift in Sources */,
 				ADB8B9DB289A35D300A50E21 /* Todo.swift in Sources */,
 				AD8EB03B2898FF46005880A5 /* AppDelegate.swift in Sources */,
+				ADB8B9DE289A4E5B00A50E21 /* NetworkManager.swift in Sources */,
 				ADB8B9D62899F8C600A50E21 /* TodoModel.swift in Sources */,
 				ADB8B9D22899F75500A50E21 /* TodoViewModel.swift in Sources */,
 				AD8EB03D2898FF46005880A5 /* SceneDelegate.swift in Sources */,
@@ -434,6 +454,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		ADB8B9DF289A4E8600A50E21 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -461,6 +489,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ADB8B9CC2899F26900A50E21 /* XCRemoteSwiftPackageReference "RxDataSources" */;
 			productName = RxDataSources;
+		};
+		ADB8B9E0289A4E8600A50E21 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ADB8B9DF289A4E8600A50E21 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

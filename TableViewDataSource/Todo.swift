@@ -8,7 +8,7 @@
 import Foundation
 import RxDataSources
 
-struct Todo {
+struct Todo: Codable{
     var userId: Int = 0
     var id: Int = 0
     var title: String = ""
