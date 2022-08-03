@@ -53,7 +53,12 @@ private extension TodoViewController {
     func bindUI() {
         viewModel.outputs.todoListPublishSubject
             .bind(to: todoTableView.rx.items) { tableView, indexPath, element in
-                return UITableViewCell()
+                guard let cell = tableView.dequeueReusableCell(
+                    withIdentifier: TodoTableViewCell.identifier
+                ) as? TodoTableViewCell else { return UITableViewCell() }
+
+                cell.setupCell(title: "테스트 데이터")
+                return cell
             }
             .disposed(by: disposeBag)
     }
