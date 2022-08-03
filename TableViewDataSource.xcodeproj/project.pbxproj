@@ -23,6 +23,7 @@
 		ADB8B9DB289A35D300A50E21 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8B9DA289A35D300A50E21 /* Todo.swift */; };
 		ADB8B9DE289A4E5B00A50E21 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8B9DD289A4E5B00A50E21 /* NetworkManager.swift */; };
 		ADB8B9E1289A4E8600A50E21 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = ADB8B9E0289A4E8600A50E21 /* Alamofire */; };
+		ADB8B9E4289A50DF00A50E21 /* URLInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB8B9E3289A50DF00A50E21 /* URLInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		ADB8B9D9289A226600A50E21 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		ADB8B9DA289A35D300A50E21 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		ADB8B9DD289A4E5B00A50E21 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		ADB8B9E3289A50DF00A50E21 /* URLInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				ADB8B9DD289A4E5B00A50E21 /* NetworkManager.swift */,
+				ADB8B9E3289A50DF00A50E21 /* URLInfo.swift */,
 			);
 			name = Manager;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				ADB8B9D62899F8C600A50E21 /* TodoModel.swift in Sources */,
 				ADB8B9D22899F75500A50E21 /* TodoViewModel.swift in Sources */,
 				AD8EB03D2898FF46005880A5 /* SceneDelegate.swift in Sources */,
+				ADB8B9E4289A50DF00A50E21 /* URLInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
