@@ -16,19 +16,34 @@ final class TodoTableViewCell: UITableViewCell {
         return label
     }()
 
-    private lazy var contentLabel: UILabel = {
-        let label = UILabel()
+    private lazy var checkImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
 
-        return label
+        return imageView
     }()
 
-    private lazy var userNameLabel: UILabel = {
-        let label = UILabel()
+    private lazy var completeButton: UIButton = {
+        let button = UIButton()
 
-        return label
+        return button
     }()
 
-    func setupCell(title: String, content: String, userName: String) {
 
+
+    func setupCell(
+        title: String,
+        content: String,
+        userName: String
+    ) {
+
+    }
+}
+
+private extension TodoTableViewCell {
+    func setupViews() {
+        [
+            titleLabel
+        ]
     }
 }
