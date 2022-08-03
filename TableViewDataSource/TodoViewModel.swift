@@ -13,7 +13,7 @@ protocol TodoViewModelInput {
 }
 
 protocol TodoViewModelOutput {
-
+    var todoListPublishSubject: PublishSubject<[TodoModel]> { get }
 }
 
 protocol TodoViewModelType {
@@ -26,17 +26,31 @@ final class TodoViewModel: TodoViewModelInput, TodoViewModelOutput, TodoViewMode
     var inputs: TodoViewModelInput { self }
     var outputs: TodoViewModelOutput { self }
 
+    var todoListPublishSubject: PublishSubject<[TodoModel]> = .init()
+
     private var todoList: [TodoModel] = [
         TodoModel(
             todoId: UUID().uuidString,
             userName: "david",
             title: "random",
             contents: "random contents"
-        )
+        ),
+        TodoModel(
+            todoId: UUID().uuidString,
+            userName: "david",
+            title: "Create a Repository",
+            contents: "Create a Repository Contents"
+        ),
+        TodoModel(
+            todoId: UUID().uuidString,
+            userName: "david",
+            title: "Vue.js Test",
+            contents: "Create a Vue.js sample test"
+        ),
     ]
 
 
     func loadTodoList() {
-
+        outputs.todoListPublishSubject.onNext(todoList)
     }
 }
