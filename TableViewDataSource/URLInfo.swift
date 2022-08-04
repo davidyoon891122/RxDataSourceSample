@@ -13,7 +13,7 @@ enum URLInfo {
     var url: URL? {
         switch self {
         case .todo:
-            return URL(string: "http://localhost:5005")
+            return URL(string: "http://localhost:5005/todolist")
         }
     }
 }

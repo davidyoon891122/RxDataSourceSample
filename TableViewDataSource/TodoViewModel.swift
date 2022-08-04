@@ -30,6 +30,8 @@ final class TodoViewModel: TodoViewModelInput, TodoViewModelOutput, TodoViewMode
     var todoListPublishSubject: PublishSubject<[TodoModel]> = .init()
     var todoListDatasourcePublishSubject: PublishSubject<[TodoSectionModel]> = .init()
 
+    var disposeBag = DisposeBag()
+
     private var todoList: [TodoModel] = [
         TodoModel(
             todoId: UUID().uuidString,
@@ -65,6 +67,19 @@ final class TodoViewModel: TodoViewModelInput, TodoViewModelOutput, TodoViewMode
     func loadTodoList() {
         outputs.todoListPublishSubject.onNext(todoList)
 
-        outputs.todoListDatasourcePublishSubject.onNext(todoListDataSource)
+        NetworkManager.shared.requestJsonHolder(
+            url: URLInfo.todo.url,
+            type: [Todo].self
+        )
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                let todoListSectionModel = [TodoSectionModel(
+                    header: "Header",
+                    items: $0
+                )]
+                self.outputs.todoListDatasourcePublishSubject.onNext(todoListSectionModel)
+            })
+            .disposed(by: disposeBag)
+        
     }
 }

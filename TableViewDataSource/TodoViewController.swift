@@ -36,16 +36,6 @@ class TodoViewController: UIViewController {
         super.viewWillAppear(animated)
         bindUI()
         viewModel.inputs.loadTodoList()
-
-        NetworkManager.shared.requestJsonHolder(
-            url: URLInfo.todo.url,
-            type: [Todo].self
-        )
-            .subscribe(onNext: {
-                print($0)
-            })
-            .disposed(by: disposeBag)
-
     }
 }
 

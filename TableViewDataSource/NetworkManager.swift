@@ -24,9 +24,9 @@ final class NetworkManager {
             ).responseDecodable(of: T.self) { response in
                 switch response.result {
                 case .success(let data):
-                    print(data)
+                    emitter.onNext(data)
                 case .failure(let error):
-                    print(error)
+                    emitter.onError(error)
                 }
             }
             return Disposables.create()
