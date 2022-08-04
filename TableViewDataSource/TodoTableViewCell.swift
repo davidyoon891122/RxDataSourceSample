@@ -20,6 +20,7 @@ final class TodoTableViewCell: UITableViewCell {
             ofSize: 18.0,
             weight: .bold
         )
+        label.numberOfLines = 0
 
         return label
     }()
@@ -84,9 +85,9 @@ private extension TodoTableViewCell {
                 contentView.addSubview($0)
             }
 
-        let imageSize: CGFloat = 50.0
+        let imageSize: CGFloat = 30.0
         let offset: CGFloat = 16.0
-
+        let buttonSize: CGFloat = 50.0
         checkImageView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(offset)
@@ -101,10 +102,10 @@ private extension TodoTableViewCell {
         }
 
         completeButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(offset)
+            $0.centerY.equalTo(titleLabel)
             $0.trailing.equalToSuperview().offset(-offset)
-            $0.width.equalTo(imageSize)
-            $0.bottom.equalToSuperview().offset(-offset)
+            $0.width.equalTo(buttonSize)
+
         }
     }
 
