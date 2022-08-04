@@ -58,19 +58,19 @@ final class TodoTableViewCell: UITableViewCell {
     private var disposeBag = DisposeBag()
 
     func setupCell(
-        title: String,
-        isCompleted: Bool
+        todo: Todo,
+        viewModel: TodoViewModel
     ) {
         selectionStyle = .none
-        titleLabel.text = title
+        titleLabel.text = todo.title
         setupViews()
-        if isCompleted {
+        if todo.completed {
             checkImageView.image = UIImage(systemName: "checkmark.circle")
         } else {
             checkImageView.image = UIImage(systemName: "")
         }
 
-        bindUI()
+        bindUI(todo: todo, viewModel: viewModel)
     }
 }
 
@@ -109,11 +109,15 @@ private extension TodoTableViewCell {
         }
     }
 
-    func bindUI() {
+    func bindUI(
+        todo: Todo,
+        viewModel: TodoViewModel
+    ) {
         completeButton.rx.tap
             .asDriver()
             .drive(onNext: {
                 print("Tapped")
+                viewModel.inputs.modifyCompleteState(selectedTodo: todo)
             })
             .disposed(by: disposeBag)
     }

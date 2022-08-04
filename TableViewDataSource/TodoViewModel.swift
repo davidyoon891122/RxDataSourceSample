@@ -10,6 +10,7 @@ import RxSwift
 
 protocol TodoViewModelInput {
     func loadTodoList()
+    func modifyCompleteState(selectedTodo: Todo)
 }
 
 protocol TodoViewModelOutput {
@@ -32,29 +33,7 @@ final class TodoViewModel: TodoViewModelInput, TodoViewModelOutput, TodoViewMode
 
     var disposeBag = DisposeBag()
 
-    private var todoList: [TodoModel] = [
-        TodoModel(
-            todoId: UUID().uuidString,
-            userName: "david",
-            title: "random",
-            contents: "random contents",
-            isCompleted: true
-        ),
-        TodoModel(
-            todoId: UUID().uuidString,
-            userName: "david",
-            title: "Create a Repository",
-            contents: "Create a Repository Contents",
-            isCompleted: false
-        ),
-        TodoModel(
-            todoId: UUID().uuidString,
-            userName: "david",
-            title: "Vue.js Test",
-            contents: "Create a Vue.js sample test",
-            isCompleted: false
-        ),
-    ]
+    var todoList: [Todo] = []
 
     private var todoListDataSource: [TodoSectionModel] = [
         TodoSectionModel(header: "Header", items: [
@@ -63,16 +42,14 @@ final class TodoViewModel: TodoViewModelInput, TodoViewModelOutput, TodoViewMode
 
     ]
 
-
     func loadTodoList() {
-        outputs.todoListPublishSubject.onNext(todoList)
-
         NetworkManager.shared.requestJsonHolder(
             url: URLInfo.todo.url,
             type: [Todo].self
         )
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
+                self.todoList = $0
                 let todoListSectionModel = [TodoSectionModel(
                     header: "Header",
                     items: $0
@@ -81,5 +58,24 @@ final class TodoViewModel: TodoViewModelInput, TodoViewModelOutput, TodoViewMode
             })
             .disposed(by: disposeBag)
         
+    }
+
+    func modifyCompleteState(selectedTodo: Todo) {
+        guard var todo = todoList.filter({ todo in
+            todo.id == selectedTodo.id
+        }).first else { return }
+        todo.completed = !todo.completed
+
+        todoList = todoList.filter {
+            $0.id != todo.id
+        }
+        print("length: \(todoList.count)")
+        todoList.append(todo)
+        print("length: \(todoList.count)")
+        let todoListSectionModel = [TodoSectionModel(
+            header: "Header",
+            items: todoList
+        )]
+        outputs.todoListDatasourcePublishSubject.onNext(todoListSectionModel)
     }
 }

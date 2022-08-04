@@ -64,10 +64,7 @@ private extension TodoViewController {
                     withIdentifier: TodoTableViewCell.identifier,
                     for: indexPath
                 ) as? TodoTableViewCell else { return UITableViewCell() }
-                cell.setupCell(
-                    title: todo.title,
-                    isCompleted: todo.completed
-                )
+                cell.setupCell(todo: todo, viewModel: self.viewModel)
                 return cell
             })
             return ds
@@ -75,6 +72,7 @@ private extension TodoViewController {
 
 
         viewModel.outputs.todoListDatasourcePublishSubject
+            .debug("todoListDatasourcePublishSubject")
             .bind(to: todoTableView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
     }
