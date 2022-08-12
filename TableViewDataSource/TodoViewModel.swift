@@ -10,7 +10,7 @@ import RxSwift
 
 protocol TodoViewModelInput {
     func loadTodoList()
-    func modifyCompleteState(selectedTodo: Todo)
+    func modifyCompleteState(selectedTodo: Todo, tag: Int)
 }
 
 protocol TodoViewModelOutput {
@@ -52,7 +52,7 @@ final class TodoViewModel: TodoViewModelInput, TodoViewModelOutput, TodoViewMode
                 self.todoList = $0
                 let todoListSectionModel = [TodoSectionModel(
                     header: "Header",
-                    items: $0
+                    items: self.todoList
                 )]
                 self.outputs.todoListDatasourcePublishSubject.onNext(todoListSectionModel)
             })
@@ -60,10 +60,8 @@ final class TodoViewModel: TodoViewModelInput, TodoViewModelOutput, TodoViewMode
         
     }
 
-    func modifyCompleteState(selectedTodo: Todo) {
-        guard var todo = todoList.filter({ todo in
-            todo.id == selectedTodo.id
-        }).first else { return }
+    func modifyCompleteState(selectedTodo: Todo, tag: Int) {
+        var todo = todoList[tag]
         todo.completed = !todo.completed
 
         todoList = todoList.filter {
@@ -71,7 +69,14 @@ final class TodoViewModel: TodoViewModelInput, TodoViewModelOutput, TodoViewMode
         }
         print("length: \(todoList.count)")
         todoList.append(todo)
+
         print("length: \(todoList.count)")
+
+        let completedTasks = todoList.filter {
+            $0.completed == true
+        }
+        print(completedTasks.count)
+
         let todoListSectionModel = [TodoSectionModel(
             header: "Header",
             items: todoList

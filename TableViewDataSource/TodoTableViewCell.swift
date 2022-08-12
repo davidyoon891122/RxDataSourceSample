@@ -72,6 +72,15 @@ final class TodoTableViewCell: UITableViewCell {
 
         bindUI(todo: todo, viewModel: viewModel)
     }
+
+    func setButtonTag(index: Int) {
+        completeButton.tag = index
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
+    }
 }
 
 private extension TodoTableViewCell {
@@ -117,7 +126,7 @@ private extension TodoTableViewCell {
             .asDriver()
             .drive(onNext: {
                 print("Tapped")
-                viewModel.inputs.modifyCompleteState(selectedTodo: todo)
+                viewModel.inputs.modifyCompleteState(selectedTodo: todo, tag: self.completeButton.tag)
             })
             .disposed(by: disposeBag)
     }

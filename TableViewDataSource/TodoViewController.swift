@@ -65,6 +65,7 @@ private extension TodoViewController {
                     for: indexPath
                 ) as? TodoTableViewCell else { return UITableViewCell() }
                 cell.setupCell(todo: todo, viewModel: self.viewModel)
+                cell.setButtonTag(index: indexPath.row)
                 return cell
             })
             return ds
