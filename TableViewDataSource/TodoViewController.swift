@@ -12,6 +12,14 @@ import RxSwift
 import RxDataSources
 
 class TodoViewController: UIViewController {
+    private lazy var remainTaskLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 20.0, weight: .bold)
+        label.textColor = .gray
+
+        return label
+    }()
+
     private lazy var todoTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(
@@ -42,14 +50,20 @@ class TodoViewController: UIViewController {
 private extension TodoViewController {
     func setupViews() {
         [
+            remainTaskLabel,
             todoTableView
         ]
             .forEach {
                 view.addSubview($0)
             }
 
-        todoTableView.snp.makeConstraints {
+        remainTaskLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.equalToSuperview().offset(16.0)
+        }
+
+        todoTableView.snp.makeConstraints {
+            $0.top.equalTo(remainTaskLabel.snp.bottom).offset(4.0)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
@@ -75,6 +89,14 @@ private extension TodoViewController {
         viewModel.outputs.todoListDatasourcePublishSubject
             .debug("todoListDatasourcePublishSubject")
             .bind(to: todoTableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+
+        viewModel.outputs.remainTaskPublushSubject
+            .debug("remainTaskPublushSubject")
+            .subscribe(onNext: { [weak self] remainTask in
+                guard let self = self else { return }
+                self.remainTaskLabel.text = "RemainTask: \(remainTask)"
+            })
             .disposed(by: disposeBag)
     }
 }

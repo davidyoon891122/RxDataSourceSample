@@ -127,6 +127,7 @@ private extension TodoTableViewCell {
             .drive(onNext: {
                 print("Tapped")
                 viewModel.inputs.modifyCompleteState(selectedTodo: todo, tag: self.completeButton.tag)
+                viewModel.inputs.requestRefreshRemainTask()
             })
             .disposed(by: disposeBag)
     }

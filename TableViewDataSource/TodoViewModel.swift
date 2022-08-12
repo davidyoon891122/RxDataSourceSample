@@ -11,11 +11,13 @@ import RxSwift
 protocol TodoViewModelInput {
     func loadTodoList()
     func modifyCompleteState(selectedTodo: Todo, tag: Int)
+    func requestRefreshRemainTask()
 }
 
 protocol TodoViewModelOutput {
     var todoListPublishSubject: PublishSubject<[TodoModel]> { get }
     var todoListDatasourcePublishSubject: PublishSubject<[TodoSectionModel]> { get }
+    var remainTaskPublushSubject: PublishSubject<Int> { get }
 }
 
 protocol TodoViewModelType {
@@ -30,6 +32,7 @@ final class TodoViewModel: TodoViewModelInput, TodoViewModelOutput, TodoViewMode
 
     var todoListPublishSubject: PublishSubject<[TodoModel]> = .init()
     var todoListDatasourcePublishSubject: PublishSubject<[TodoSectionModel]> = .init()
+    var remainTaskPublushSubject: PublishSubject<Int> = .init()
 
     var disposeBag = DisposeBag()
 
@@ -82,5 +85,11 @@ final class TodoViewModel: TodoViewModelInput, TodoViewModelOutput, TodoViewMode
             items: todoList
         )]
         outputs.todoListDatasourcePublishSubject.onNext(todoListSectionModel)
+    }
+
+    func requestRefreshRemainTask() {
+        outputs.remainTaskPublushSubject.onNext(todoList.filter {
+            $0.completed != true
+        }.count)
     }
 }
